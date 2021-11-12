@@ -7,11 +7,18 @@ import (
 	"myjsonrpcv2/internal/app/conf"
 	"myjsonrpcv2/internal/app/db"
 	"myjsonrpcv2/internal/app/global"
+	"myjsonrpcv2/pkg/snowflake"
 	"net/http"
 )
 
 func Serve(cfg *conf.Config) {
 	global.Config = cfg
+	sf, err := snowflake.NewSnowflakeUUID(cfg.Server.DataCenterId, cfg.Server.WorkerId)
+	if err != nil {
+		log.Fatal(err)
+	}
+	global.Sf = sf
+	//println(global.Sf.GenerateUUID())	//uuid
 	db.InitMysqlDB(cfg.Mysql)
 	db.CreateTable()
 	mr := jsonrpc.NewMethodRepository()

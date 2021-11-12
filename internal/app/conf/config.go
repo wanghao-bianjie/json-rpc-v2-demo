@@ -12,8 +12,10 @@ type (
 	}
 
 	Server struct {
-		Port string `mapstructure:"port"`
-		Prod bool   `mapstructure:"prod"`
+		Port         string `mapstructure:"port"`
+		Prod         bool   `mapstructure:"prod"`
+		DataCenterId int64  `mapstructure:"data_center_id"`
+		WorkerId     int64  `mapstructure:"worker_id"`
 	}
 
 	Mysql struct {

@@ -1,6 +1,8 @@
 [server]
 port = 8081
 prod = "false"
+data_center_id = 1
+worker_id = 1
 
 [mysql]
 host = "127.0.0.1"
