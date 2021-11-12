@@ -12,4 +12,20 @@ type (
 	PositionalResult struct {
 		Message []int `json:"message"`
 	}
+
+	DetailParams struct {
+		Name string `json:"name"`
+	}
+	DetailResult struct {
+		Name string `json:"name"`
+		Age  int    `json:"age"`
+	}
+
+	AddParams struct {
+		Name string `json:"name"`
+		Age  int    `json:"age"`
+	}
+	AddResult struct {
+		Id uint `json:"id"`
+	}
 )

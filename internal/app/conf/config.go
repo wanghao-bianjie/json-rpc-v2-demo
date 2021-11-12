@@ -1,5 +1,10 @@
 package conf
 
+import (
+	"bytes"
+	"github.com/spf13/viper"
+)
+
 type (
 	Config struct {
 		Server Server `mapstructure:"server"`
@@ -21,3 +26,18 @@ type (
 		TimeZone string `mapstructure:"time_zone"`
 	}
 )
+
+func ReadConfig(data []byte) (*Config, error) {
+	v := viper.New()
+	v.SetConfigType("toml")
+	reader := bytes.NewReader(data)
+	err := v.ReadConfig(reader)
+	if err != nil {
+		return nil, err
+	}
+	var conf Config
+	if err := v.Unmarshal(&conf); err != nil {
+		return nil, err
+	}
+	return &conf, nil
+}
